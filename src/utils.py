@@ -21,13 +21,18 @@ def count_lines_with_progress(filename):
     return count
 
 async def parse_api(data: dict, site: str):
+
     headers = {
-        "Traceparent": "00-d4178d0dcc53934e811c63238aae5a7b-627b961d83824164-01",
-        "sec-ch-ua-platform": '"macOS"',
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36",
-        "X-Client-Version": "release-20250314-bk231365-de4ba7bfef89a",
-        "sec-ch-ua": '"Not A(Brand";v="8", "Chromium";v="132", "Google Chrome";v="132"',
+        "accept": "*/*",
+        "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+        "priority": "u=1, i",
+        "sec-ch-ua": '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
         "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"macOS"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-origin",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     }
 
     cookies = {"BSSESSID": data.get("token", "")}
@@ -119,3 +124,12 @@ async def generate_excel(excel_name, data):
         ws.append([key] + value)
 
     wb.save(excel_name)
+
+
+if __name__ == "__main__":
+    import asyncio
+
+
+    data = {"token":""}
+    site = ""
+    asyncio.run(parse_api(data, site))
